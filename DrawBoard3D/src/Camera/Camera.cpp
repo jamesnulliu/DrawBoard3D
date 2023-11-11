@@ -78,7 +78,7 @@ namespace db3d {
         return moved;
     }
 
-    void Camera::OnResize(uint32_t width, uint32_t height)
+    void Camera::OnResize(u32 width, u32 height)
     {
         if (width == m_viewportWidth && height == m_viewportHeight)
             return;
@@ -136,9 +136,9 @@ namespace db3d {
     {
         m_rayDirections.resize(m_viewportWidth * m_viewportHeight);
 
-        for (uint32_t y = 0; y < m_viewportHeight; y++)
+        for (u32 y = 0; y < m_viewportHeight; y++)
         {
-            for (uint32_t x = 0; x < m_viewportWidth; x++)
+            for (u32 x = 0; x < m_viewportWidth; x++)
             {
                 glm::vec2 coord = { (f32)x / (f32)m_viewportWidth, (f32)y / (f32)m_viewportHeight };
                 coord = coord * 2.0f - 1.0f; // -1 -> 1

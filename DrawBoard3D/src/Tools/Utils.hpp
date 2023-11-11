@@ -1,6 +1,10 @@
 #pragma once
 #include "Essentials.hpp"
 
+#include <concepts>
+
+#include "glm/glm.hpp"
+
 namespace db3d {
     constexpr f32 PI = 3.14159265358979323846f;
     constexpr f32 Degree2Radian(f32 degree) { return degree * PI / 180.0f; }
@@ -70,6 +74,17 @@ namespace db3d {
     {
         seed = PCG_Hash(seed);
         return f32(seed) / f32(std::numeric_limits<u32>::max());
+    }
+
+    template<typename SrcT, typename DstT>
+        requires (IsPoint2D<SrcT> && IsPoint2D<DstT>) || (IsPoint3D<SrcT> && IsPoint3D<DstT>)
+    constexpr DstT Cvt(const SrcT& src)
+    {
+        if constexpr (IsPoint2D<SrcT> && IsPoint2D<DstT>) {
+            return DstT{ src[0], src[1] };
+        } else if constexpr (IsPoint3D<SrcT> && IsPoint3D<DstT>) {
+            return DstT{ src[0], src[1], src[2] };
+        }
     }
 
 }

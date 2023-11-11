@@ -1,14 +1,16 @@
 #pragma once
 #include "Essentials.hpp"
+#include <vector>
+#include "glm/glm.hpp"
+#include "glm/gtx/quaternion.hpp"
 
 namespace db3d {
     class Camera
     {
     public:
-        Camera(float verticalFOV, float nearClip, float farClip);
-
-        bool OnUpdate(float ts);
-        void OnResize(uint32_t width, uint32_t height);
+        explicit Camera(f32 verticalFOV, f32 nearClip, f32 farClip);
+        bool OnUpdate(f32 dt);
+        void OnResize(u32 width, u32 height);
 
         template<typename T = f32>
         std::array<T,2> GetViewportSize() const { return { T(m_viewportWidth), T(m_viewportHeight) }; }
@@ -25,7 +27,7 @@ namespace db3d {
 
         void SetPosition(glm::vec3 position) { m_position = position; }
 
-        float GetRotationSpeed();
+        f32 GetRotationSpeed();
 
         glm::vec3 ScreenToWorld(const glm::vec2& screenCoord) const;
 
