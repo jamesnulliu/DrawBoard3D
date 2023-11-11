@@ -3,13 +3,18 @@
 
 #include "Walnut/Image.h"
 
+#include "Tools/Logger.hpp"
+
 class ExampleLayer : public Walnut::Layer
 {
 public:
 	virtual void OnUIRender() override
 	{
+		static int count = 0;
 		ImGui::Begin("Hello");
-		ImGui::Button("Button");
+		if (ImGui::Button("Button")) {
+			DB3D_TRACE("Hey! Button has been pressend {} times", ++count);
+		}
 		ImGui::End();
 
 		ImGui::ShowDemoWindow();
@@ -19,7 +24,7 @@ public:
 Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 {
 	Walnut::ApplicationSpecification spec;
-	spec.Name = "Walnut Example";
+	spec.Name = "DrawBoard3D";
 
 	Walnut::Application* app = new Walnut::Application(spec);
 	app->PushLayer<ExampleLayer>();

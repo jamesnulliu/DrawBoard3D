@@ -16,8 +16,6 @@ public:
      * @param lineEnd - End point of the line segment: {x2, y2}.
      * @param bottomLeft - Bottom left point of the rectangle: {x_min, y_min}.
      * @param topRight - Top right point of the rectangle: {x_max, y_max}.
-     * @return If the line segment is completely outside the rectangle, return {-1, -1};
-     *         Otherwise, return the clipped line segment: {{x1, y1}, {x2, y2}}.
     */
     static void LineClip(Point& lineStart, Point& lineEnd, const Point& bottomLeft, const Point& topRight)
     {
@@ -29,7 +27,9 @@ public:
         while (code0 != 0 || code1 != 0) {
             // If both points are outside rectangle, in same region, reject line
             if ((code0 & code1) != 0) {
-                return { -1, -1 };
+                lineStart[0] = lineStart[0] = -1;
+                lineEnd[0] = lineEnd[1] = -1;
+                return;
             }
             // Pick a point outside rectangle
             code = code0 == 0 ? code1 : code0;

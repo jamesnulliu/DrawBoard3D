@@ -27,11 +27,13 @@ public:
         f32 epsilon = 1e-1;
 
         if (code0 == 0 && code1 == 0) {
-            return { lineStart, lineEnd };
+            return;
         }
 
         if ((code0 & code1) != 0) {
-            return { -1,-1 };
+            lineStart[0] = lineStart[0] = -1;
+            lineEnd[0] = lineEnd[1] = -1;
+            return;
         }
 
 
