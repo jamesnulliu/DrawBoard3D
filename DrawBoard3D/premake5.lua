@@ -1,11 +1,11 @@
-project "WalnutApp"
+project "DrawBoard3D"
    kind "ConsoleApp"
    language "C++"
-   cppdialect "C++17"
+   cppdialect "C++20"
    targetdir "bin/%{cfg.buildcfg}"
    staticruntime "off"
 
-   files { "src/**.h", "src/**.cpp" }
+   files { "src/**.hpp", "src/**.cpp", "src/**.h" }
 
    includedirs
    {
@@ -16,6 +16,8 @@ project "WalnutApp"
       "../Walnut/Walnut/src",
 
       "%{IncludeDir.VulkanSDK}",
+
+      "src",
    }
 
    links
