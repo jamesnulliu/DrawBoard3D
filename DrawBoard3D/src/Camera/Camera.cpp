@@ -30,31 +30,31 @@ namespace db3d {
 
         // Movement
         if (Walnut::Input::IsKeyDown(Walnut::KeyCode::W)) {
-            m_position += m_forwardDirection * m_speed * dt;
+            m_position += m_forwardDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         } else if (Walnut::Input::IsKeyDown(Walnut::KeyCode::S)) {
-            m_position -= m_forwardDirection * m_speed * dt;
+            m_position -= m_forwardDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         }else if (Walnut::Input::IsKeyDown(Walnut::KeyCode::A)) {
-            m_position -= rightDirection * m_speed * dt;
+            m_position -= rightDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         } else if (Walnut::Input::IsKeyDown(Walnut::KeyCode::D)) {
-            m_position += rightDirection * m_speed * dt;
+            m_position += rightDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         } else if (Walnut::Input::IsKeyDown(Walnut::KeyCode::Q)) {
-            m_position -= upDirection * m_speed * dt;
+            m_position -= upDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         } else if (Walnut::Input::IsKeyDown(Walnut::KeyCode::E)) {
-            m_position += upDirection * m_speed * dt;
+            m_position += upDirection * m_moveSpeed * dt;
             moved = true;
-            if (m_speed <= m_maxSpeed) m_speed += m_deltaSpeed;
+            if (m_moveSpeed <= m_moveSpeedMax) m_moveSpeed += m_moveSpeedDelta;
         } else {
-            m_speed = 2.0f;
+            m_moveSpeed = 2.0f;
         }
 
         // Rotation
@@ -89,11 +89,6 @@ namespace db3d {
         RecalculateProjection();
         RecalculateView();
         RecalculateRayDirections();
-    }
-
-    f32 Camera::GetRotationSpeed()
-    {
-        return 0.15f;
     }
 
     glm::vec2 Camera::WorldToScreen(const glm::vec3& point) const

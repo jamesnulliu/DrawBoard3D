@@ -13,7 +13,7 @@ public:
 		static int count = 0;
 		ImGui::Begin("Hello");
 		if (ImGui::Button("Button")) {
-			DB3D_TRACE("Hey! Button has been pressend {} times", ++count);
+			DB3D_TRACE("Hey! Button has been pressed for {} times", ++count);
 		}
 		ImGui::End();
 

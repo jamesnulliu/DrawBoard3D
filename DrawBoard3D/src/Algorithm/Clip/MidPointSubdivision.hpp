@@ -16,10 +16,8 @@ public:
      * @param lineEnd - End point of the line segment: {x2, y2}.
      * @param bottomLeft - Bottom left point of the rectangle: {x_min, y_min}.
      * @param topRight - Top right point of the rectangle: {x_max, y_max}.
-     * @return If the line segment is completely outside the rectangle, return {-1, -1};
-     *         Otherwise, return the clipped line segment: {{x1, y1}, {x2, y2}}.
     */
-    static void LineClip(Point lineStart, Point lineEnd, Point bottomLeft, Point topRight)
+    static void LineClip(Point& lineStart, Point& lineEnd, const Point& bottomLeft, const Point& topRight)
     {
         i32 code0 = Encode(lineStart, bottomLeft, topRight);
         i32 code1 = Encode(lineEnd, bottomLeft, topRight);

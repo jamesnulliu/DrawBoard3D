@@ -17,7 +17,7 @@ public:
      * @param polygonPoints - Points of the polygon.
      * @param boundary - Points of the boundary.
     */
-    static void Clip(std::vector<Point>& polygonPoints, const std::vector<Point> boundaryPoints)
+    static void Clip(std::vector<Point>& polygonPoints, const std::vector<Point>& boundaryPoints)
     {
         for (u64 i = 0; i < boundaryPoints.size(); ++i) {
             i64 k = (i64(i) + 1LL) % i64(boundaryPoints.size());
