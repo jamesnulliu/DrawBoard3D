@@ -4,13 +4,12 @@
 #include <source_location>
 
 namespace db3d {
-    constexpr std::string_view SrcName(std::source_location location = std::source_location::current()) {
-        std::string_view s = location.file_name();
-        if constexpr (_WIN32 || _WIN64) {
-            return s.substr(s.find_last_of('\\') + 1);
-        } else {
-            return s.substr(s.find_last_of('/') + 1);
-        }
+    constexpr std::string_view SourceFileName(std::string_view s) {
+#ifdef _WIN64 || _WIN32
+        return s.substr(s.find_last_of('\\') + 1);
+#else
+        return s.substr(s.find_last_of('/') + 1);
+#endif // _WIN64 || _WIN32
     }
 }
 
@@ -26,16 +25,16 @@ namespace db3d {
 #define DB3D_LOG_FMT   "[{}:{}|{}]>>>>>\n+ {}\n"
 
 #define DB3D_TRACE(...)  \
-    std::cout << std::format(DB3D_LOG_FMT, db3d::SrcName(), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
+    std::cout << std::format(DB3D_LOG_FMT, db3d::SourceFileName(__FILE__), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
 
 #define DB3D_INFO(...)  \
-    std::cout << std::format(DB3D_LOG_GREEN DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SrcName(), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
+    std::cout << std::format(DB3D_LOG_GREEN DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SourceFileName(__FILE__), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
 
 #define DB3D_WARNING(...)  \
-    std::cout << std::format(DB3D_LOG_YELLOW DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SrcName(), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
+    std::cout << std::format(DB3D_LOG_YELLOW DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SourceFileName(__FILE__), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
 
 #define DB3D_ERROR(...)  \
-    std::cout << std::format(DB3D_LOG_RED DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SrcName(), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
+    std::cout << std::format(DB3D_LOG_RED DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SourceFileName(__FILE__), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
 
 #define DB3D_CRITICAL(...)  \
-    std::cout << std::format(DB3D_LOG_CYAN DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SrcName(), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
+    std::cout << std::format(DB3D_LOG_CYAN DB3D_LOG_FMT DB3D_LOG_RESET, db3d::SourceFileName(__FILE__), __LINE__, __FUNCTION__, std::format(__VA_ARGS__))
