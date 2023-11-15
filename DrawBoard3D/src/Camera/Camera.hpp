@@ -10,7 +10,7 @@ namespace db3d {
     public:
         explicit Camera(f32 verticalFOV, f32 nearClip, f32 farClip);
         bool OnUpdate(f32 dt);
-        void OnResize(u32 width, u32 height);
+        void OnResize(u64 width, u64 height);
 
         template<typename T = f32>
         std::array<T,2> GetViewportSize() const { return { T(m_viewportWidth), T(m_viewportHeight) }; }

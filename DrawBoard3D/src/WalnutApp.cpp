@@ -5,21 +5,8 @@
 
 #include "Tools/Logger.hpp"
 
-class ExampleLayer : public Walnut::Layer
-{
-public:
-	virtual void OnUIRender() override
-	{
-		static int count = 0;
-		ImGui::Begin("Hello");
-		if (ImGui::Button("Button")) {
-			DB3D_INFO("Hey! Button has been pressed for {} times", ++count);
-		}
-		ImGui::End();
+#include "Layer/DrawBoardLayer.hpp"
 
-		ImGui::ShowDemoWindow();
-	}
-};
 
 Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 {
@@ -27,7 +14,7 @@ Walnut::Application* Walnut::CreateApplication(int argc, char** argv)
 	spec.Name = "DrawBoard3D";
 
 	Walnut::Application* app = new Walnut::Application(spec);
-	app->PushLayer<ExampleLayer>();
+	app->PushLayer<db3d::DrawBoardLayer>();
 	app->SetMenubarCallback([app]()
 	{
 		if (ImGui::BeginMenu("File"))

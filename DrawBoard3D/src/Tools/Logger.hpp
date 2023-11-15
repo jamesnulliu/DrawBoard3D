@@ -5,7 +5,7 @@
 
 namespace db3d {
     constexpr std::string_view SourceFileName(std::string_view s) {
-#ifdef _WIN64 || _WIN32
+#if defined(_WIN64) || defined(_WIN32)
         return s.substr(s.find_last_of('\\') + 1);
 #else
         return s.substr(s.find_last_of('/') + 1);

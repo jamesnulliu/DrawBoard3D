@@ -78,7 +78,7 @@ namespace db3d {
         return moved;
     }
 
-    void Camera::OnResize(u32 width, u32 height)
+    void Camera::OnResize(u64 width, u64 height)
     {
         if (width == m_viewportWidth && height == m_viewportHeight)
             return;
